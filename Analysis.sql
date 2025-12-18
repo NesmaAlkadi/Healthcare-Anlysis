@@ -123,6 +123,17 @@ GROUP BY Medical_Condition, Test_Results
 ORDER BY Medical_Condition, Result_Count DESC;
 
 
+----------------------------------------------------------------
+ALTER TABLE PatientsData_healthecare_clean
+ADD Season VARCHAR(10);
+
+UPDATE PatientsData_healthecare_clean
+SET Season = CASE
+WHEN MONTH(Date_of_Admission) IN (12, 1, 2) THEN 'Winter' WHEN MONTH(Date_of_Admission) IN (3, 4, 5) THEN 'Spring' WHEN MONTH(Date_of_Admission) IN (6, 7, 8) THEN 'Summer' WHEN MONTH(Date_of_Admission) IN (9, 10, 11) THEN 'Fall'
+END;
+----------------------------------------------------------------
+
+
 ------- SECTION 2: Hospital & Doctor inisghts
 
 ----------------------------------------------------------------
@@ -326,5 +337,6 @@ SELECT
     ) AS YoY_Percent_Change
 FROM YearlyAdmissions
 ORDER BY Admission_Year;
+
 
 
